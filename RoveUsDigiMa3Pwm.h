@@ -13,7 +13,7 @@
 class RoveUsDigiMa3Pwm
 {
 public:
-  void  attach( uint8_t pin, const int priority=7 );
+  void  attach( uint8_t pin, int priority=7 );
   void  start();
   void  stop();
 

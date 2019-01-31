@@ -22,11 +22,11 @@ void setup()
   Encoder_TimerT4APinPM4.start();
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void debugPrint()
 {
-  Serial.print(  "Encoder_TimerT4APinPM4 angle degrees: "); Serial.println( Encoder_TimerT4APinPM4.readMillidegrees() / 1000.0 ); 
-  Serial.print(  "Encoder_TimerT4APinPM4 angle radians: "); Serial.println( Encoder_TimerT4APinPM4.readRadians()               ); 
+  Serial.print( "Encoder_TimerT4APinPM4 angle degrees: "); Serial.println( Encoder_TimerT4APinPM4.readMillidegrees() / 1000.0 ); 
+  Serial.print( "Encoder_TimerT4APinPM4 angle radians: "); Serial.println( Encoder_TimerT4APinPM4.readRadians()               ); 
 }
 
 //////////////////////////////////////////////////////
