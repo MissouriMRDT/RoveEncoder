@@ -10,40 +10,54 @@
 
 #include <stdint.h>
 
-/////////////////////////////////////////////////////////////////////
-void  RoveUsDigiMa3Pwm::attach( uint8_t pin, int priority )
-{ this->EncoderCcpTimer.attach(         pin,           priority ); }
+void  RoveUsDigiMa3Pwm::attach( uint8_t  pin, int  priority, //////////////////////
+                                              bool auto_recalibrate,
+                                              int  offset_millidegrees ,
+                                              int  read_decipercent_at_0_dgrees, 
+                                              int  read_decipercent_at_360_degrees )
+{ this->PwmRead.attach(                  pin,      priority ); 
+  this->AUTO_RECALIBRATE               = auto_recalibrate;
+  this->OFFSET_MILLIDEGREES            = offset_millidegrees;
+  this->READ_DECIPECENT_AT_0_DEGREES   = read_decipercent_at_0_dgrees;
+  this->READ_DECIPECENT_AT_360_DEGREES = read_decipercent_at_360_degrees; }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-int RoveUsDigiMa3Pwm::readMillidegrees()
-{ 
-  int width_min_decipercent = 330; // todo => debug, then constants
-  int width_max_decipercent = 660; // todo => debug, then constants
-  int width_decipercent = this->EncoderCcpTimer.readDutyDecipercent();
+int RoveUsDigiMa3Pwm::readMillidegrees() ////////////////////////////////////////////////////////////////////////////
+{          int  duty_decipercent = this->PwmRead.readDutyDecipercent();
+  if(           duty_decipercent < this->READ_DECIPECENT_AT_0_DEGREES ) 
+  { if( this->AUTO_RECALIBRATE ) { this->READ_DECIPECENT_AT_0_DEGREES   = duty_decipercent;                   }
+    else                         { duty_decipercent                     = this->READ_DECIPECENT_AT_0_DEGREES; } }
 
-  if(      width_decipercent < width_min_decipercent  ) { width_decipercent = width_min_decipercent; }
-  else if( width_decipercent > width_max_decipercent  ) { width_decipercent = width_max_decipercent; }
+  else if(      duty_decipercent > this->READ_DECIPECENT_AT_360_DEGREES ) 
+  { if( this->AUTO_RECALIBRATE ) { this->READ_DECIPECENT_AT_360_DEGREES = duty_decipercent;                     }
+    else                         { duty_decipercent                     = this->READ_DECIPECENT_AT_360_DEGREES; } }
 
-  return map( width_decipercent, width_min_decipercent, width_max_decipercent, 0, 360000 ); 
+  int angle_millidegrees = map( duty_decipercent, 
+                                this->READ_DECIPECENT_AT_0_DEGREES, this->READ_DECIPECENT_AT_360_DEGREES, 0, 360000 )
+                              + this->OFFSET_MILLIDEGREES;
+
+  if      ( angle_millidegrees < 0 ){ angle_millidegrees += 360; }
+  else if ( angle_millidegrees > 0 ){ angle_millidegrees -= 360; }
+  return    angle_millidegrees;
 }
 
-//////////////////////////////////////////////////////////////////////////
-float RoveUsDigiMa3Pwm::readRadians()
-{ return DEG_TO_RAD * ( this->readMillidegrees() / 1000.0 );  } // Todo
+float RoveUsDigiMa3Pwm::readDegrees() ////////
+{ return this->readMillidegrees() / 1000.0;  }
 
-//////////////////////////////////////////////////////////////////////////////////////
-void RoveUsDigiMa3Pwm::start()        {        this->EncoderCcpTimer.start(); }
-void RoveUsDigiMa3Pwm::stop()         {        this->EncoderCcpTimer.stop(); }
-bool RoveUsDigiMa3Pwm::isWireBroken() { return this->EncoderCcpTimer.isWireBroken(); }
+float RoveUsDigiMa3Pwm::readRadians() ///////
+{ return DEG_TO_RAD * this->readDegrees();  }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-void RoveUsDigiMa3PwmWireBreaks::attachMillis( uint8_t timer, int period_millis, int priority )
-{       this->AllWireBreaksTimer.attachMillis(         timer,     period_millis,     priority ); }
+void RoveUsDigiMa3Pwm::start()        {        this->PwmRead.start(); } //////
+void RoveUsDigiMa3Pwm::stop()         {        this->PwmRead.stop();  }
+bool RoveUsDigiMa3Pwm::isWireBroken() { return this->PwmRead.isWireBroken(); }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
-void RoveUsDigiMa3PwmWireBreaks::attachMicros( uint8_t timer, int period_micros, int priority )
-{       this->AllWireBreaksTimer.attachMicros(         timer,     period_micros,     priority ); }
+void RoveUsDigiMa3PwmWireBreaks::attach(       uint8_t timer, int priority ) /////////////////////
+{               this->WireBreaks.attach(               timer,     priority ); }
 
-//////////////////////////////////////////////////////////////////////////////
-void RoveUsDigiMa3PwmWireBreaks::start() { this->AllWireBreaksTimer.start(); }
-void RoveUsDigiMa3PwmWireBreaks::stop()  { this->AllWireBreaksTimer.stop();  }
+void RoveUsDigiMa3PwmWireBreaks::attachMillis( uint8_t timer, int period_millis, int priority ) //
+{               this->WireBreaks.attachMillis(         timer,     period_millis,     priority ); }
+
+void RoveUsDigiMa3PwmWireBreaks::attachMicros( uint8_t timer, int period_micros, int priority ) //
+{               this->WireBreaks.attachMicros(         timer,     period_micros,     priority ); }
+
+void RoveUsDigiMa3PwmWireBreaks::start() { this->WireBreaks.start(); }
+void RoveUsDigiMa3PwmWireBreaks::stop()  { this->WireBreaks.stop();  }

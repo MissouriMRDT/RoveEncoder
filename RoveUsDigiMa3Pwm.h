@@ -9,37 +9,43 @@
 
 #include <stdint.h>
 
-////////////////////////////////////////////////////
-class RoveUsDigiMa3Pwm
+class RoveUsDigiMa3Pwm /////////////////////////////////////////////////////
 {
 public:
-  void  attach( uint8_t pin, int priority=7 );
+  void  attach( uint8_t pin, int  priority                        =     7, 
+                             bool auto_recalibrate                = false,
+                             int  offset_millidegrees             =     0, 
+                             int  read_decipercent_at_0_dgrees    =     0, 
+                             int  read_decipercent_at_360_degrees =  1000 );
   void  start();
   void  stop();
 
   int   readMillidegrees();
+  float readDegrees();
   float readRadians();
-
   bool  isWireBroken();
 
-//private:
-  
-  RovePwmRead    EncoderCcpTimer;
+// private:
+  RovePwmRead    PwmRead;
   uint8_t        pin;
+
+  int  READ_DECIPECENT_AT_0_DEGREES;
+  int  READ_DECIPECENT_AT_360_DEGREES;
+  int  OFFSET_MILLIDEGREES;
+  bool AUTO_RECALIBRATE;
 };
 
-///////////////////////////////////////////////////////////////////////
-class RoveUsDigiMa3PwmWireBreaks
+class RoveUsDigiMa3PwmWireBreaks ///////////////////////////////////////
 {
   public: 
+  void attach(       uint8_t timer, int priority=7 );
   void attachMillis( uint8_t timer, int period_millis, int priority=7 );
   void attachMicros( uint8_t timer, int period_micros, int priority=7 );
 
   void start();
   void stop();
-//private:
 
-  RovePwmReadWireBreaks    AllWireBreaksTimer;
+  RovePwmReadWireBreaks    WireBreaks;
 };
 
 #endif // ROVE_US_DIGI_MA3_PWM_H
