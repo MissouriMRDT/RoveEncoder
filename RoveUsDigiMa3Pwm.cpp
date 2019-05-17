@@ -13,13 +13,15 @@
 void  RoveUsDigiMa3Pwm::attach( uint8_t  pin, int  priority, //////////////////////
                                               bool auto_recalibrate,
                                               int  offset_millidegrees ,
+                                              bool invert,
                                               int  read_decipercent_at_0_dgrees, 
                                               int  read_decipercent_at_360_degrees )
 { this->PwmRead.attach(                  pin,      priority ); 
   this->AUTO_RECALIBRATE               = auto_recalibrate;
   this->OFFSET_MILLIDEGREES            = offset_millidegrees;
   this->READ_DECIPECENT_AT_0_DEGREES   = read_decipercent_at_0_dgrees;
-  this->READ_DECIPECENT_AT_360_DEGREES = read_decipercent_at_360_degrees; }
+  this->READ_DECIPECENT_AT_360_DEGREES = read_decipercent_at_360_degrees;
+  this->INVERT_READING                 = invert; }
 
 int RoveUsDigiMa3Pwm::readMillidegrees() ////////////////////////////////////////////////////////////////////////////
 {          int  duty_decipercent = this->PwmRead.readDutyDecipercent();
@@ -34,9 +36,13 @@ int RoveUsDigiMa3Pwm::readMillidegrees() ///////////////////////////////////////
   int angle_millidegrees = map( duty_decipercent, 
                                 this->READ_DECIPECENT_AT_0_DEGREES, this->READ_DECIPECENT_AT_360_DEGREES, 0, 360000 )
                               + this->OFFSET_MILLIDEGREES;
+  
+  if      ( angle_millidegrees >= 360000 ){ angle_millidegrees = angle_millidegrees%360000; }
+  else if      ( angle_millidegrees <= 0 ){ angle_millidegrees = 360000 - abs(angle_millidegrees); }
+  
+  if      (this->INVERT_READING)  { angle_millidegrees = 360000 - angle_millidegrees;}
 
-  if      ( angle_millidegrees < 0 ){ angle_millidegrees += 360; }
-  else if ( angle_millidegrees > 0 ){ angle_millidegrees -= 360; }
+
   return    angle_millidegrees;
 }
 

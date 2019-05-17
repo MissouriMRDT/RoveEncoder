@@ -15,6 +15,7 @@ public:
   void  attach( uint8_t pin, int  priority                        =     7, 
                              bool auto_recalibrate                = false,
                              int  offset_millidegrees             =     0, 
+                             bool invert                          = false,
                              int  read_decipercent_at_0_dgrees    =     0, 
                              int  read_decipercent_at_360_degrees =  1000 );
   void  start();
@@ -33,6 +34,8 @@ public:
   int  READ_DECIPECENT_AT_360_DEGREES;
   int  OFFSET_MILLIDEGREES;
   bool AUTO_RECALIBRATE;
+  bool INVERT_READING;
+
 };
 
 class RoveUsDigiMa3PwmWireBreaks ///////////////////////////////////////
