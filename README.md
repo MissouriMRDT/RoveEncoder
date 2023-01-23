@@ -1,7 +1,5 @@
-# RoveWare
-Dev2019 for Missouri S and T IoT Rover, Networked Tiva C microcontroller boosterpacks based on Energia IDE platform for the University Rover Challenge
-<pre>
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Depends on RoveHalTiva, please install from https://github.com/MissouriMRDT/RoveHalTiva 
+# RoveEncoder
+Embedded software libraries for encoders, developed for use with Arduino. All encoders extend the abstract class [RoveEncoder](RoveEncoder.h).
 
-</pre>
+## Supported Devices
+ - [US Digital MA3 (Analog)](https://www.usdigital.com/products/encoders/absolute/shaft/MA3)
