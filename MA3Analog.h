@@ -19,7 +19,6 @@ public:
 	MA3Analog(int port) : m_port(port) {}
 
 	void configCalibration(float minAnalog, float maxAnalog, bool autoRecalibrate);
-	void configFrequency(unsigned int frequency);
 
 	float readDegrees();
 	

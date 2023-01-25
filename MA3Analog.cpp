@@ -31,10 +31,6 @@ float MA3Analog::analogToDegrees(float analog) {
 #include <Arduino.h>
 
 
-void MA3Analog::configFrequency(unsigned int frequency) {
-	analogWriteFrequency(m_port, frequency);
-}
-
 float MA3Analog::readDegrees() {
 	float degrees = (m_inverted? -1 : 1) * analogToDegrees(analogRead(m_port)) - m_offsetDegrees;
 
