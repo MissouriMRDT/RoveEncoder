@@ -4,11 +4,11 @@
 #include <cmath>
 
 
-void RoveEncoder::configInvert(bool invert) {
+void RoveEncoder::configInvert(const bool& invert) {
     m_inverted = invert;
 }
 
-void RoveEncoder::configOffset(float offsetDegrees) {
+void RoveEncoder::configOffset(const float& offsetDegrees) {
     m_offsetDegrees = offsetDegrees;
 }
 

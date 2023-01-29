@@ -4,10 +4,11 @@
 
 
 float MA3Analog::boundDegrees0_360(float degrees) {
-	return fmod(fmod(degrees, 360.0) + 360.0, 360.0);
+	degrees = fmod(degrees, 360.0);
+	return (degrees < 0)? (degrees + 360.0) : degrees;
 }
 
-void MA3Analog::configCalibration(float minAnalog, float maxAnalog, bool autoRecalibrate) {
+void MA3Analog::configCalibration(const float& minAnalog, const float& maxAnalog, const bool& autoRecalibrate) {
 	m_minAnalog = minAnalog;
 	m_maxAnalog = maxAnalog;
 	m_autoRecalibrate = autoRecalibrate;
@@ -32,7 +33,7 @@ float MA3Analog::analogToDegrees(float analog) {
 
 
 float MA3Analog::readDegrees() {
-	float degrees = (m_inverted? -1 : 1) * analogToDegrees(analogRead(m_port)) - m_offsetDegrees;
+	float degrees = (m_inverted? -1 : 1) * analogToDegrees(analogRead(m_pin)) - m_offsetDegrees;
 
 	return boundDegrees0_360(degrees);
 }

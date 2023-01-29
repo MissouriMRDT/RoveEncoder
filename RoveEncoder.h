@@ -1,6 +1,7 @@
 #ifndef ROVEENCODER_H
 #define ROVEENCODER_H
 
+
 class RoveEncoder {
 
 protected:
@@ -10,10 +11,34 @@ protected:
 
 public:
 
-    void configInvert(bool invert);
-    void configOffset(float offsetDegrees);
+    /**
+     * @brief Configure whether to invert the encoder value when read.
+     * 
+     * @param invert 
+     */
+    void configInvert(const bool& invert);
 
+    /**
+     * @brief Configure the offset to subtract when read, after invert is applied.
+     * Can be used to zero the encoder by calling configOffset(readDegrees()).
+     * 
+     * @param offsetDegrees 
+     */
+    void configOffset(const float& offsetDegrees);
+
+
+    /**
+     * @brief Read the encoder value in radians.
+     * 
+     * @return Current radian value. 
+     */
     float readRadians();
+
+    /**
+     * @brief Read the encoder value in degrees.
+     * 
+     * @return Current degree value. 
+     */
     virtual float readDegrees() = 0;
     
 };
