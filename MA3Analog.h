@@ -15,14 +15,6 @@ private:
 	bool m_autoRecalibrate = false;
 
 	/**
-	 * @brief Bound the input degree value between 0 and 360.
-	 * 
-	 * @param degrees Value to be bounded.
-	 * @return The equivalent angle [0, 360).
-	 */
-	float boundDegrees0_360(float degrees);
-
-	/**
 	 * @brief Convert the input analog value to degrees.
 	 * 
 	 * @param analog Value to convert.

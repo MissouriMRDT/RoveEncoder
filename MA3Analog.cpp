@@ -1,12 +1,5 @@
 #include "MA3Analog.h"
 
-#include <cmath>
-
-
-float MA3Analog::boundDegrees0_360(float degrees) {
-	degrees = fmod(degrees, 360.0);
-	return (degrees < 0)? (degrees + 360.0) : degrees;
-}
 
 void MA3Analog::configCalibration(const float& minAnalog, const float& maxAnalog, const bool& autoRecalibrate) {
 	m_minAnalog = minAnalog;

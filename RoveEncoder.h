@@ -9,6 +9,14 @@ protected:
     bool m_inverted = false;
     float m_offsetDegrees = 0;
 
+	/**
+	 * @brief Bound the input degree value between 0 and 360.
+	 * 
+	 * @param degrees Value to be bounded.
+	 * @return The equivalent angle [0, 360).
+	 */
+	float boundDegrees0_360(float degrees);
+
 public:
 
     /**
