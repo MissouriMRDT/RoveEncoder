@@ -7,7 +7,7 @@ void MA3Analog::configCalibration(const float& minAnalog, const float& maxAnalog
 	m_autoRecalibrate = autoRecalibrate;
 }
 
-float MA3Analog::analogToDegrees(float analog) {
+float MA3Analog::analogToDegrees(float analog) const {
 	if (analog < m_minAnalog) {
 		if (m_autoRecalibrate) m_minAnalog = analog;
 		else analog = m_minAnalog;
@@ -25,7 +25,7 @@ float MA3Analog::analogToDegrees(float analog) {
 #include <Arduino.h>
 
 
-float MA3Analog::readDegrees() {
+float MA3Analog::readDegrees() const {
 	float degrees = (m_inverted? -1 : 1) * analogToDegrees(analogRead(m_pin)) - m_offsetDegrees;
 
 	return boundDegrees0_360(degrees);

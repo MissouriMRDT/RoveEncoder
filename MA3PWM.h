@@ -17,7 +17,7 @@ private:
     volatile uint32_t m_lastFallingEdge = 0;
     volatile uint16_t m_timeHigh = 1;
     volatile uint16_t m_timeLow = 4097;
-    uint16_t m_lastTicks = 1;
+    mutable uint16_t m_lastTicks = 1;
 
 
 public:
@@ -49,14 +49,14 @@ public:
      * 
      * @return Current PWM value [0, 4096);
      */
-    uint16_t readPWM();
+    uint16_t readPWM() const;
 
     /**
 	 * @brief Read the encoder value in degrees.
 	 * 
 	 * @return Current degree value [0, 360). 
 	 */
-    float readDegrees();
+    float readDegrees() const;
 };
 
 #endif

@@ -11,7 +11,7 @@ class MA3Analog : public RoveEncoder {
 private:
 
 	uint8_t m_pin;
-	float m_minAnalog = 0, m_maxAnalog = 1023;
+	mutable float m_minAnalog = 0, m_maxAnalog = 1023;
 	bool m_autoRecalibrate = false;
 
 	/**
@@ -20,7 +20,7 @@ private:
 	 * @param analog Value to convert.
 	 * @return Equivalent reading in degrees.
 	 */
-	float analogToDegrees(float analog);
+	float analogToDegrees(float analog) const;
 
 public:
 
@@ -45,7 +45,7 @@ public:
 	 * 
 	 * @return Current degree value [0, 360). 
 	 */
-	float readDegrees();
+	float readDegrees() const;
 	
 };
 

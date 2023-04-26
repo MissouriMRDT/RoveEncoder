@@ -5,6 +5,6 @@ void TestEncoder::setDegrees(const float& degrees) {
     m_degrees = degrees;
 }
 
-float TestEncoder::readDegrees() {
+float TestEncoder::readDegrees() const {
     return (m_inverted? -1 : 1) * m_degrees - m_offsetDegrees;
 }

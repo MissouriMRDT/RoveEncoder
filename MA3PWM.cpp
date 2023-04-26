@@ -21,7 +21,7 @@ void MA3PWM::begin(void (*isr)(void)) {
     attachInterrupt(digitalPinToInterrupt(m_pin), isr, CHANGE);
 }
 
-uint16_t MA3PWM::readPWM() {
+uint16_t MA3PWM::readPWM() const {
     // See https://www.usdigital.com/products/encoders/absolute/shaft/ma3/ for details
     uint16_t ticks = (m_timeHigh * 4098) / (m_timeHigh + m_timeLow);
     
@@ -31,8 +31,10 @@ uint16_t MA3PWM::readPWM() {
     return (ticks == 4097)? 4095 : ticks - 1;
 }
 
-float MA3PWM::readDegrees() {
-    return readPWM() * 360.0 / 4096.0;
+float MA3PWM::readDegrees() const {
+	float degrees = ((m_inverted? -1 : 1) * readPWM() * 360.0 / 4096.0) - m_offsetDegrees;
+
+	return boundDegrees0_360(degrees);
 }
 
 

@@ -31,7 +31,7 @@ public:
 	 * 
 	 * @return Current degree value.
 	 */
-	float readDegrees();
+	float readDegrees() const;
 
 };
 

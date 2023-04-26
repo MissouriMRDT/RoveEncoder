@@ -15,7 +15,7 @@ protected:
 	 * @param degrees Value to be bounded.
 	 * @return The equivalent angle [0, 360).
 	 */
-	float boundDegrees0_360(float degrees);
+	float boundDegrees0_360(float degrees) const;
 
 public:
 
@@ -40,14 +40,14 @@ public:
      * 
      * @return Current radian value. 
      */
-    float readRadians();
+    float readRadians() const;
 
     /**
      * @brief Read the encoder value in degrees.
      * 
      * @return Current degree value. 
      */
-    virtual float readDegrees() = 0;
+    virtual float readDegrees() const = 0;
     
 };
 

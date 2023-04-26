@@ -4,7 +4,7 @@
 #include <cmath>
 
 
-float RoveEncoder::boundDegrees0_360(float degrees) {
+float RoveEncoder::boundDegrees0_360(float degrees) const {
 	degrees = fmod(degrees, 360.0);
 	return (degrees < 0)? (degrees + 360.0) : degrees;
 }
@@ -17,6 +17,6 @@ void RoveEncoder::configOffset(const float& offsetDegrees) {
     m_offsetDegrees = offsetDegrees;
 }
 
-float RoveEncoder::readRadians() {
+float RoveEncoder::readRadians() const {
     return readDegrees() * M_PI / 180.0;
 }
