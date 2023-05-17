@@ -34,6 +34,13 @@ public:
      */
     void configOffset(const float& offsetDegrees);
 
+    /**
+     * @brief Calculate the offset that will make readDegrees() return the provided value.
+     * 
+     * @param degrees
+     */
+    void setDegrees(const float& degrees);
+
 
     /**
      * @brief Read the encoder value in radians.

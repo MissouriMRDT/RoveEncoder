@@ -17,6 +17,10 @@ void RoveEncoder::configOffset(const float& offsetDegrees) {
     m_offsetDegrees = offsetDegrees;
 }
 
+void RoveEncoder::setDegrees(const float& degrees) {
+    configOffset(readDegrees() + m_offsetDegrees - degrees);
+}
+
 float RoveEncoder::readRadians() const {
     return readDegrees() * M_PI / 180.0;
 }
