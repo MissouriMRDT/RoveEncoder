@@ -31,7 +31,7 @@ public:
 
 
     /**
-     * @brief Handle an edge change of the PWM signal
+     * @brief Handle an edge change of the PWM signal.
      * 
      */
     void handleInterrupt();
