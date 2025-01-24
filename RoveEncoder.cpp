@@ -17,6 +17,10 @@ void RoveEncoder::configOffset(const float& offsetDegrees) {
     m_offsetDegrees = offsetDegrees;
 }
 
+void RoveEncoder::configNegativeDegrees(const bool& enable) {
+    m_allowNegativeDegrees = enable;
+}
+
 void RoveEncoder::setDegrees(const float& degrees) {
     configOffset(readDegrees() + m_offsetDegrees - degrees);
 }

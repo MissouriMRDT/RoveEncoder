@@ -8,6 +8,7 @@ protected:
 
     bool m_inverted = false;
     float m_offsetDegrees = 0;
+    bool m_allowNegativeDegrees = false;
 
 	/**
 	 * @brief Bound the input degree value between 0 and 360.
@@ -33,6 +34,8 @@ public:
      * @param offsetDegrees 
      */
     void configOffset(const float& offsetDegrees);
+
+    void configNegativeDegrees(const bool& enable);
 
     /**
      * @brief Calculate the offset that will make readDegrees() return the provided value.

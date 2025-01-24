@@ -37,6 +37,11 @@ uint16_t MA3PWM::readPWM() const {
 
 float MA3PWM::readDegrees() const {
 	float degrees = ((m_inverted? -1 : 1) * readPWM() * 360.0 / 4096.0) - m_offsetDegrees;
+    degrees = boundDegrees0_360(degrees);
 
-	return boundDegrees0_360(degrees);
+    if (m_allowNegativeDegrees) {
+        if (degrees > 180) degrees -= 360;
+    }
+    
+	return degrees;
 }
