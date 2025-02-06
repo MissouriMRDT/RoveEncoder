@@ -27,7 +27,7 @@ public:
 	 * 
 	 * @param pin The Arduino pin number to use.
 	 */
-    MA3PWM(const uint8_t& pin) : m_pin(pin) {}
+    MA3PWM(uint8_t pin) : m_pin(pin) {}
 
 
     /**

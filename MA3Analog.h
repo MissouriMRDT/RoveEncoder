@@ -29,7 +29,7 @@ public:
 	 * 
 	 * @param pin The Arduino pin number to use.
 	 */
-	MA3Analog(const uint8_t& pin) : m_pin(pin) {}
+	MA3Analog(uint8_t pin) : m_pin(pin) {}
 
 	/**
 	 * @brief Configure the values used to convert Arduino analogRead() to degrees.
@@ -38,7 +38,7 @@ public:
 	 * @param maxAnalog The maximum analog signal, defaults to 1023.
 	 * @param autoRecalibrate Allow adjustment of minAnalog and maxAnalog if they are ever exceeded.
 	 */
-	void configCalibration(const float& minAnalog, const float& maxAnalog, const bool& autoRecalibrate);
+	void configCalibration(float minAnalog, float maxAnalog, bool autoRecalibrate);
 
 	/**
 	 * @brief Read the encoder value in degrees.

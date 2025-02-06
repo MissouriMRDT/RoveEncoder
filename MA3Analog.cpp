@@ -1,7 +1,7 @@
 #include "MA3Analog.h"
 
 
-void MA3Analog::configCalibration(const float& minAnalog, const float& maxAnalog, const bool& autoRecalibrate) {
+void MA3Analog::configCalibration(float minAnalog, float maxAnalog, bool autoRecalibrate) {
 	m_minAnalog = minAnalog;
 	m_maxAnalog = maxAnalog;
 	m_autoRecalibrate = autoRecalibrate;

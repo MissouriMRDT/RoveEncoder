@@ -1,6 +1,6 @@
 #include "ParallaxFeedback.h"
 
-void ParallaxFeedback::configCalibration(const float& minDutyCycle, const float& maxDutyCycle, const bool& autoRecalibrate) {
+void ParallaxFeedback::configCalibration(float minDutyCycle, float maxDutyCycle, bool autoRecalibrate) {
     m_minDutyCycle = minDutyCycle;
     m_maxDutyCycle = maxDutyCycle;
     m_autoRecalibrate = autoRecalibrate;

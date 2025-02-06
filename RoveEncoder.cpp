@@ -9,19 +9,19 @@ float RoveEncoder::boundDegrees0_360(float degrees) const {
 	return (degrees < 0)? (degrees + 360.0) : degrees;
 }
 
-void RoveEncoder::configInvert(const bool& invert) {
+void RoveEncoder::configInvert(bool invert) {
     m_inverted = invert;
 }
 
-void RoveEncoder::configOffset(const float& offsetDegrees) {
+void RoveEncoder::configOffset(float offsetDegrees) {
     m_offsetDegrees = offsetDegrees;
 }
 
-void RoveEncoder::configNegativeDegrees(const bool& enable) {
+void RoveEncoder::configNegativeDegrees(bool enable) {
     m_allowNegativeDegrees = enable;
 }
 
-void RoveEncoder::setDegrees(const float& degrees) {
+void RoveEncoder::setDegrees(float degrees) {
     configOffset(readDegrees() + m_offsetDegrees - degrees);
 }
 

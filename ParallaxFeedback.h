@@ -29,7 +29,7 @@ public:
 	 * 
 	 * @param pin The Arduino pin number to use.
 	 */
-	ParallaxFeedback(const uint8_t& pin) : m_pin(pin) {}
+	ParallaxFeedback(uint8_t pin) : m_pin(pin) {}
 
     /**
      * @brief Set duty cycle bounds.
@@ -38,7 +38,7 @@ public:
      * @param maxDutyCycle The duty cycle corresponding to 359 degrees absolute rotation, defaults to 0.971 (97.1%).
      * @param autoRecalibrate Allow adjustment of minDutyCycle and maxDutyCycle if they are ever exceeded.
      */
-    void configCalibration(const float& minDutyCycle, const float& maxDutyCycle, const bool& autoRecalibrate);
+    void configCalibration(float minDutyCycle, float maxDutyCycle, bool autoRecalibrate);
     
     /**
      * @brief Handle an edge change of the PWM signal.

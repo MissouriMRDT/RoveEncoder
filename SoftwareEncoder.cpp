@@ -1,6 +1,6 @@
 #include "SoftwareEncoder.h"
 
-void SoftwareEncoder::begin(float (*readDegrees)()) {
+void SoftwareEncoder::begin(float (*readDegrees)(void)) {
     m_readDegrees = readDegrees;
 }
 

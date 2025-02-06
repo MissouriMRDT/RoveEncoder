@@ -1,6 +1,6 @@
 #include "RoveQuadEncoder.h"
 
-RoveQuadEncoder::RoveQuadEncoder(const uint8_t& pinA, const uint8_t& pinB, float cpr) {
+RoveQuadEncoder::RoveQuadEncoder(uint8_t pinA, uint8_t pinB, float cpr) {
     m_pinA = pinA;
     m_pinB = pinB;
     m_countsToDegrees = 360.0 / cpr;

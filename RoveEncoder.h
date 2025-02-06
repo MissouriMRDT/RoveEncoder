@@ -25,7 +25,7 @@ public:
      * 
      * @param invert 
      */
-    void configInvert(const bool& invert);
+    void configInvert(bool invert);
 
     /**
      * @brief Configure the offset to subtract when read, after invert is applied.
@@ -33,16 +33,20 @@ public:
      * 
      * @param offsetDegrees 
      */
-    void configOffset(const float& offsetDegrees);
+    void configOffset(float offsetDegrees);
 
-    void configNegativeDegrees(const bool& enable);
+    /**
+     * @brief Configure whether to allow negative angles. If the encoder is bound
+     * to range [0, 360), this has the effect of transforming the allowed range to [-180, 180)
+     */
+    void configNegativeDegrees(bool enable);
 
     /**
      * @brief Calculate the offset that will make readDegrees() return the provided value.
      * 
      * @param degrees
      */
-    void setDegrees(const float& degrees);
+    void setDegrees(float degrees);
 
 
     /**

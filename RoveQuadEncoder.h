@@ -33,7 +33,7 @@ public:
      * @param pinB Arduino pin number.
      * @param cpr Encoder counts per rotation of output shaft.
      */
-    RoveQuadEncoder(const uint8_t& pinA, const uint8_t& pinB, float cpr);
+    RoveQuadEncoder(uint8_t pinA, uint8_t pinB, float cpr);
 
     /**
      * @brief Handle an edge change in the pinA or pinB signal.
