@@ -12,6 +12,7 @@ protected:
 
 	/**
 	 * @brief Bound the input degree value between 0 and 360.
+     * If m_allowNegativeDegrees is set, bound the input degree value between -180 and 180.
 	 * 
 	 * @param degrees Value to be bounded.
 	 * @return The equivalent angle [0, 360).
@@ -38,6 +39,8 @@ public:
     /**
      * @brief Configure whether to allow negative angles. If the encoder is bound
      * to range [0, 360), this has the effect of transforming the allowed range to [-180, 180)
+     * 
+     * @param enable
      */
     void configNegativeDegrees(bool enable);
 

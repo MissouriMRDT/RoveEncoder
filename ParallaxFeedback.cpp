@@ -1,15 +1,12 @@
 #include "ParallaxFeedback.h"
 
+#include <Arduino.h>
+
 void ParallaxFeedback::configCalibration(float minDutyCycle, float maxDutyCycle, bool autoRecalibrate) {
     m_minDutyCycle = minDutyCycle;
     m_maxDutyCycle = maxDutyCycle;
     m_autoRecalibrate = autoRecalibrate;
 }
-
-
-#if defined(ARDUINO)
-#include <Arduino.h>
-
 
 void ParallaxFeedback::handleInterrupt() {
     if (digitalRead(m_pin)) {
@@ -48,8 +45,6 @@ void ParallaxFeedback::begin(void (*isr)(void)) {
     attachInterrupt(digitalPinToInterrupt(m_pin), isr, CHANGE);
 }
 
-
-#endif
 
 float ParallaxFeedback::readDutyCycle() const {
     return m_lastDutyCycle;

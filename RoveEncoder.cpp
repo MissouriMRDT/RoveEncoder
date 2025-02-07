@@ -5,8 +5,15 @@
 
 
 float RoveEncoder::boundDegrees0_360(float degrees) const {
-	degrees = fmod(degrees, 360.0);
-	return (degrees < 0)? (degrees + 360.0) : degrees;
+    degrees = fmod(degrees, 360.0);
+    if (m_allowNegativeDegrees) {
+        if (degrees < -180) degrees += 360;
+        if (degrees > 180) degrees -= 360;
+        return degrees;
+    } else {
+        if (degrees < 0) degrees += 360;
+        return degrees;
+    }
 }
 
 void RoveEncoder::configInvert(bool invert) {

@@ -1,5 +1,6 @@
 #include "MA3Analog.h"
 
+#include <Arduino.h>
 
 void MA3Analog::configCalibration(float minAnalog, float maxAnalog, bool autoRecalibrate) {
 	m_minAnalog = minAnalog;
@@ -20,16 +21,8 @@ float MA3Analog::analogToDegrees(float analog) const {
 	return (analog - m_minAnalog) / (m_maxAnalog - m_minAnalog) * 360.0;
 }
 
-
-#if defined(ARDUINO)
-#include <Arduino.h>
-
-
 float MA3Analog::readDegrees() const {
 	float degrees = (m_inverted? -1 : 1) * analogToDegrees(analogRead(m_pin)) - m_offsetDegrees;
 
 	return boundDegrees0_360(degrees);
 }
-
-
-#endif

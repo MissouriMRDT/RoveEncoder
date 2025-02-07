@@ -1,5 +1,7 @@
 #include "RoveQuadEncoder.h"
 
+#include <Arduino.h>
+
 RoveQuadEncoder::RoveQuadEncoder(uint8_t pinA, uint8_t pinB, float cpr) {
     m_pinA = pinA;
     m_pinB = pinB;
@@ -58,11 +60,6 @@ void RoveQuadEncoder::update() {
     }
 }
 
-
-#if defined(ARDUINO)
-#include <Arduino.h>
-
-
 void RoveQuadEncoder::handleInterrupt() {
     m_lastA = m_currentA;
     m_lastB = m_currentB;
@@ -78,10 +75,6 @@ void RoveQuadEncoder::begin(void (*isr)(void)) {
     attachInterrupt(digitalPinToInterrupt(m_pinA), isr, CHANGE);
     attachInterrupt(digitalPinToInterrupt(m_pinB), isr, CHANGE);
 }
-
-
-#endif
-
 
 float RoveQuadEncoder::readDegrees() const {
     return (m_inverted? -1 : 1) * m_count * m_countsToDegrees - m_offsetDegrees;
