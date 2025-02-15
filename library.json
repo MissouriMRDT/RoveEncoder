@@ -1,0 +1,14 @@
+{
+  "name": "RoveEncoder",
+  "author": "MissouriMRDT",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MissouriMRDT/RoveEncoder.git"
+  },
+  "description": "Embedded software libraries for encoders, developed for use with Arduino.",
+  "keywords": [ "roveencoder", "mrdt" ],
+  "frameworks": [ "arduino" ],
+  "platforms": [ "titiva", "teensy" ],
+  "examples": []
+}
